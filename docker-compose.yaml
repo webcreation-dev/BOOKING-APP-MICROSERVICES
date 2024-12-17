@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:6.0  # Version spécifique de MongoDB
+    container_name: mongodb_container
+    ports:
+      - "27017:27017"  # Mappe le port MongoDB au port local
+    volumes:
+      - mongo-data:/data/db  # Persistance des données
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin  # Nom d'utilisateur par défaut
+      MONGO_INITDB_ROOT_PASSWORD: password  # Mot de passe par défaut
+    restart: unless-stopped  # Redémarre automatiquement si nécessaire
+
+volumes:
+  mongo-data:  # Volume pour stocker les données MongoDB
