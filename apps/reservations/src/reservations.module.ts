@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ReservationsService } from './reservations.service';
 import { ReservationsController } from './reservations.controller';
-import { DatabaseModule } from '@app/common';
+import { DatabaseModule, LoggerExceptionFilter } from '@app/common';
 import { ReservationsRepository } from './reservations.repository';
 import {
   ReservationDocument,
   ReservationSchema,
 } from './models/reservation.schema';
 import { LoggerModule } from '@app/common';
+import { APP_FILTER } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -18,6 +19,13 @@ import { LoggerModule } from '@app/common';
     LoggerModule,
   ],
   controllers: [ReservationsController],
-  providers: [ReservationsService, ReservationsRepository],
+  providers: [
+    ReservationsService,
+    ReservationsRepository,
+    {
+      provide: APP_FILTER,
+      useClass: LoggerExceptionFilter,
+    },
+  ],
 })
 export class ReservationsModule {}
