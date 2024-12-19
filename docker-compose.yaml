@@ -1,5 +1,5 @@
 services:
-  auth:
+  aauth:
     build:
       context: .
       dockerfile: ./apps/auth/Dockerfile

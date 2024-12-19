@@ -9,13 +9,11 @@ const dataSource = new DataSource({
   url: process.env.DATASOURCE_URL,
   entities: [
     __dirname + '/../**/*.entity{.ts,.js}', // Entités du microservice auth
+    __dirname + '/../../../libs/common/src/**/*.entity{.ts,.js}', // Entités de la librairie commune
   ],
   migrations: [
     __dirname + '/../../../../libs/common/src/migrations/*{.ts,.js}',
   ],
-  cli: {
-    migrationsDir: 'src/migrations',
-  },
 });
 
 export default dataSource;
