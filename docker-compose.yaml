@@ -1,17 +1,20 @@
-version: '3.8'
-
 services:
-  mongo:
-    image: mongo:6.0  # Version spécifique de MongoDB
-    container_name: mongodb_container
+  auth:
+    build:
+      context: .
+      dockerfile: ./apps/auth/Dockerfile
+      target: development
+    command: pnpm run start:dev auth
+    env_file:
+      - ./apps/auth/.env
     ports:
-      - "27017:27017"  # Mappe le port MongoDB au port local
+      - '3001:3001'
     volumes:
-      - mongo-data:/data/db  # Persistance des données
+      - .:/usr/src/app
+  database:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin  # Nom d'utilisateur par défaut
-      MONGO_INITDB_ROOT_PASSWORD: password  # Mot de passe par défaut
-    restart: unless-stopped  # Redémarre automatiquement si nécessaire
-
-volumes:
-  mongo-data:  # Volume pour stocker les données MongoDB
+      POSTGRES_PASSWORD: pass123  

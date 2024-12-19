@@ -1,3 +1,4 @@
+import { ErrorResponseUtil } from '@app/common/usual';
 import {
   ExceptionFilter,
   Catch,
@@ -5,7 +6,6 @@ import {
   HttpException,
 } from '@nestjs/common';
 import { Response } from 'express';
-import { ErrorResponseUtil } from 'common/util/error-response.util';
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {

@@ -1,11 +1,13 @@
 import { ArgumentsHost, Catch } from '@nestjs/common';
 import { BaseExceptionFilter } from '@nestjs/core';
-import { extractFromText } from 'common/regex/regex.util';
-import { HttpError } from 'common/util/http-error.util';
-import { DatabaseError } from 'database/interfaces/database-error.interface';
 import { Response } from 'express';
 import { QueryFailedError } from 'typeorm';
-import { ErrorResponseUtil } from 'common/util/error-response.util';
+import { DatabaseError } from '../../interfaces/database-error.interface';
+import {
+  ErrorResponseUtil,
+  extractFromText,
+  HttpError,
+} from '@app/common/usual';
 
 @Catch(QueryFailedError)
 export class DatabaseExceptionFilter extends BaseExceptionFilter {

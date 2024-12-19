@@ -12,6 +12,7 @@ import { DatabaseExceptionFilter } from '../database/exception-filters/database-
 import { HttpExceptionFilter } from '../database/exception-filters/http-exception/http-exception.filter';
 import { EntityMetadataExceptionFilter } from '../database/exception-filters/entity-metadata-exception/entity-metadata-exception.filter';
 import { LoggerModule } from '../logger';
+import { FilesExceptionFilter } from '../files/exception-filters/files-exception/files-exception.filter';
 
 @Module({
   imports: [LoggerModule],
@@ -52,10 +53,10 @@ import { LoggerModule } from '../logger';
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
-    // {
-    //   provide: APP_FILTER,
-    //   useClass: FilesExceptionFilter,
-    // },
+    {
+      provide: APP_FILTER,
+      useClass: FilesExceptionFilter,
+    },
     {
       provide: APP_FILTER,
       useClass: EntityMetadataExceptionFilter,

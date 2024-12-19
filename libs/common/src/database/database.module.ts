@@ -1,21 +1,14 @@
 import { Module } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { ModelDefinition, MongooseModule } from '@nestjs/mongoose';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { EnvModule } from '../env/env.module';
+import databaseConfig from './config/database.config';
+import { EntityClassOrSchema } from '@nestjs/typeorm/dist/interfaces/entity-class-or-schema.type';
 
 @Module({
-  imports: [
-    EnvModule,
-    MongooseModule.forRootAsync({
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB_URI'),
-      }),
-      inject: [ConfigService],
-    }),
-  ],
+  imports: [EnvModule, TypeOrmModule.forRootAsync(databaseConfig.asProvider())],
 })
 export class DatabaseModule {
-  static forFeature(models: ModelDefinition[]) {
-    return MongooseModule.forFeature(models);
+  static forFeature(models: EntityClassOrSchema[]) {
+    return TypeOrmModule.forFeature(models);
   }
 }

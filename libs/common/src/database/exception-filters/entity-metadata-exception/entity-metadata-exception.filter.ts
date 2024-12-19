@@ -1,3 +1,4 @@
+import { ErrorResponseUtil } from '@app/common/usual';
 import {
   ArgumentsHost,
   Catch,
@@ -6,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 import { EntityMetadataNotFoundError } from 'typeorm';
-import { ErrorResponseUtil } from 'common/util/error-response.util';
 
 @Catch(EntityMetadataNotFoundError)
 export class EntityMetadataExceptionFilter implements ExceptionFilter {

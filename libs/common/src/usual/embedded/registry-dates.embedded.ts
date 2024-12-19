@@ -1,15 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 
-@Schema({ _id: false })
 export class RegistryDates {
-  @Prop({ type: Date, default: Date.now })
+  @CreateDateColumn()
   created_at: Date;
 
-  @Prop({ type: Date, default: Date.now })
+  @UpdateDateColumn()
   updated_at: Date;
 
-  @Prop({ type: Date, default: null })
+  @DeleteDateColumn()
   deletedAt: Date;
 }
-
-export const RegistryDatesSchema = SchemaFactory.createForClass(RegistryDates);
