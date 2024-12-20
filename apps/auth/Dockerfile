@@ -36,5 +36,9 @@ COPY package.json pnpm-lock.yaml ./
 COPY --from=development /usr/src/app/dist ./dist
 COPY --from=development /usr/src/app/node_modules ./node_modules
 
+RUN npm install -g pnpm
+
+RUN pnpm install --prod
+
 # Commande pour démarrer l'application
 CMD ["node", "dist/apps/auth/main"]

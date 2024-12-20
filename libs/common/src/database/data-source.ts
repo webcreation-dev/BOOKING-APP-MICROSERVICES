@@ -8,11 +8,10 @@ const dataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATASOURCE_URL,
   entities: [
-    __dirname + '/../**/*.entity{.ts,.js}', // Entités du microservice auth
-    __dirname + '/../../../libs/common/src/**/*.entity{.ts,.js}', // Entités de la librairie commune
+    'dist/apps/**/src/users/entities/*.entity{.ts,.js}', // Entités des microservices
   ],
   migrations: [
-    __dirname + '/../../../../libs/common/src/migrations/*{.ts,.js}',
+    'dist/libs/common/src/migrations/*{.ts,.js}', // Migrations de la librairie commune
   ],
 });
 

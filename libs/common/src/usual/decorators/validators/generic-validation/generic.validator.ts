@@ -5,7 +5,7 @@ import {
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
-import dataSource from 'apps/auth/src/data-source';
+import dataSource from '@app/common/database/data-source';
 
 @ValidatorConstraint({ async: true })
 @Injectable()

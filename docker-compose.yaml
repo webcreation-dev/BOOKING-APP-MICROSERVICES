@@ -1,20 +1,10 @@
 services:
-  aauth:
-    build:
-      context: .
-      dockerfile: ./apps/auth/Dockerfile
-      target: development
-    command: pnpm run start:dev auth
-    env_file:
-      - ./apps/auth/.env
-    ports:
-      - '3001:3001'
-    volumes:
-      - .:/usr/src/app
   database:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - "${DATASOURCE_PORT}:5432"
     environment:
-      POSTGRES_PASSWORD: pass123  
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
