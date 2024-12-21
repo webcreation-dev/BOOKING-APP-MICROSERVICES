@@ -15,7 +15,6 @@ import { RegistryDates } from '@app/common';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  // @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
