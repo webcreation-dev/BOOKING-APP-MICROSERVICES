@@ -4,8 +4,7 @@ import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';
 import { AuthModule } from '../auth.module';
 import { UsersSubscriber } from './subscribers/users.subscriber';
-import { QueryingModule, UsualModule } from '@app/common';
-import { DatabaseModule } from '../../../../libs/common/src/database/database.module';
+import { DatabaseModule, QueryingModule, UsualModule } from '@app/common';
 
 @Module({
   imports: [

@@ -8,7 +8,6 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { HashingService } from './hashing/hashing.service';
 import { BcryptService } from './hashing/bcrypt.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local.strategy';
 import { LoginValidationMiddleware } from './middleware/login-validation/login-validation.middleware';
@@ -22,10 +21,11 @@ import { THROTTLER_MODULE_OPTIONS } from './util/auth.constants';
 import { TempUserService } from './temp-user.service';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
+import { DatabaseModule } from '@app/common';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User]),
+    DatabaseModule.forFeature([User]),
     PassportModule,
     JwtModule.registerAsync(jwtConfig.asProvider()),
     ConfigModule.forFeature(jwtConfig),

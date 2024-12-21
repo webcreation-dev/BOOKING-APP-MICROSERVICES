@@ -2,9 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AuthModule } from './auth.module';
 import { ValidationPipe } from '@nestjs/common';
 import { Logger } from 'nestjs-pino';
+import { UsersModule } from './users/users.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AuthModule, {
+  const app = await NestFactory.create(UsersModule, {
     bufferLogs: true,
   });
 
