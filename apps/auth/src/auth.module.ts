@@ -21,10 +21,15 @@ import { THROTTLER_MODULE_OPTIONS } from './util/auth.constants';
 import { TempUserService } from './temp-user.service';
 import { User } from './users/entities/user.entity';
 import { UsersModule } from './users/users.module';
-import { DatabaseModule } from '@app/common';
+import { DatabaseModule, UsualModule } from '@app/common';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
+import { RolesGuard } from './guards/roles/roles.guard';
 
 @Module({
   imports: [
+    UsualModule,
+    DatabaseModule,
     DatabaseModule.forFeature([User]),
     PassportModule,
     JwtModule.registerAsync(jwtConfig.asProvider()),
@@ -43,6 +48,14 @@ import { DatabaseModule } from '@app/common';
     LocalStrategy,
     JwtStrategy,
     TempUserService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ],
   exports: [HashingService],
 })

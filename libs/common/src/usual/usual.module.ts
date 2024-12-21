@@ -29,14 +29,6 @@ import { FilesExceptionFilter } from '../files/exception-filters/files-exception
       provide: APP_INTERCEPTOR,
       useClass: ResponseFormatInterceptor,
     },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: RolesGuard,
-    // },
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,

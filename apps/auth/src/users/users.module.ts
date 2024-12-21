@@ -4,15 +4,13 @@ import { UsersController } from './users.controller';
 import { User } from './entities/user.entity';
 import { AuthModule } from '../auth.module';
 import { UsersSubscriber } from './subscribers/users.subscriber';
-import { DatabaseModule, QueryingModule, UsualModule } from '@app/common';
+import { DatabaseModule, QueryingModule } from '@app/common';
 
 @Module({
   imports: [
-    DatabaseModule,
-    UsualModule,
     DatabaseModule.forFeature([User]),
-    forwardRef(() => AuthModule),
     QueryingModule,
+    forwardRef(() => AuthModule),
   ],
   controllers: [UsersController],
   providers: [UsersService, UsersSubscriber],
