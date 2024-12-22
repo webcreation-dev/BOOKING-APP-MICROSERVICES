@@ -1,13 +1,19 @@
-import { IsPhoneNumber, Length } from 'class-validator';
-import { User } from '../entities/user.entity';
-import { PasswordDto } from './password.dto';
-import { IsUnique } from '@app/common';
+import {
+  IsArray,
+  IsEmail,
+  IsOptional,
+  IsStrongPassword,
+} from 'class-validator';
+import { RoleDto } from './role.dto';
 
-export class CreateUserDto extends PasswordDto {
-  @Length(2, 50)
-  readonly name: string;
+export class CreateUserDto {
+  @IsEmail()
+  email: string;
 
-  @IsPhoneNumber('BJ')
-  @IsUnique(User, 'phone', { message: 'Phone must be unique' })
-  readonly phone: string;
+  @IsStrongPassword()
+  password: string;
+
+  @IsOptional()
+  @IsArray()
+  roles?: RoleDto[];
 }

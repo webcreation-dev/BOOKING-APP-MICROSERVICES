@@ -7,7 +7,7 @@ dotenvExpand.expand(dotenv.config());
 const dataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATASOURCE_URL,
-  entities: ['dist/apps/**/src/users/entities/*.entity.js'],
+  entities: ['dist/libs/common/src/models/*.entity.js'],
   migrations: ['dist/libs/common/src/database/migrations/*.js'],
 });
 
