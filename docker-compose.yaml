@@ -9,6 +9,8 @@ services:
       - ./apps/auth/.env
     ports:
       - '3001:3001'
+    depends_on:
+      - database
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules
@@ -18,4 +20,4 @@ services:
     ports:
       - "5432:5432"
     env_file:
-      - .env
+      - ./libs/common/.env

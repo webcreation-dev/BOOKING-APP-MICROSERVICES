@@ -4,17 +4,16 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
 COPY tsconfig.json tsconfig.json
 COPY nest-cli.json nest-cli.json
-
-RUN npm install -g pnpm
-
-RUN pnpm install
 
 COPY apps/auth apps/auth
 COPY libs libs
 
-RUN cd apps/auth && pnpm install
+RUN npm install -g pnpm
+
+RUN pnpm install
 
 RUN pnpm run build auth
 
@@ -27,14 +26,14 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml ./
 
 RUN npm install -g pnpm 
 
 RUN pnpm install --prod
 
-WORKDIR /usr/src/app/apps/auth
-RUN pnpm install --prod
-
 COPY --from=development /usr/src/app/dist ./dist
+
+WORKDIR /usr/src/app/apps/auth
 
 CMD ["node", "dist/apps/auth/main"]

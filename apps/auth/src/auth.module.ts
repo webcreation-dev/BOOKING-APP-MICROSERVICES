@@ -25,10 +25,12 @@ import { DatabaseModule, UsualModule } from '@app/common';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './guards/jwt-auth/jwt-auth.guard';
 import { RolesGuard } from './guards/roles/roles.guard';
+import { EnvAuthModule } from './env/env-auth.module';
 
 @Module({
   imports: [
     UsualModule,
+    EnvAuthModule,
     DatabaseModule,
     DatabaseModule.forFeature([User]),
     PassportModule,
